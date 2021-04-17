@@ -1,10 +1,18 @@
-const profileDataArgs = process.argv.slice(2, process.argv.length);
-console.log(profileDataArgs);
+// require the filesystem module
+const fs = require("fs");
 
-const printProfileData = (profileDataArr) => {
-  profileDataArr.forEach((profileItem) => {
-    console.log(profileItem);
-  });
-};
+// require generatePage
+const generatePage = require("./src/page-template.js");
 
-printProfileData(profileDataArgs);
+//collect command-line arguments
+const profileDataArgs = process.argv.slice(2);
+
+// extract arguments and store them in their own variables
+const [name, github] = profileDataArgs;
+
+// create a file: filename, data written, and callback for error
+fs.writeFile("./index.html", generatePage(name, github), (err) => {
+  if (err) throw err;
+
+  console.log("Portfolio complete! Checkout index.html to see the output!");
+});
