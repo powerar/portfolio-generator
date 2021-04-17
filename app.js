@@ -1,18 +1,25 @@
-// require the filesystem module
-const fs = require("fs");
+// // require the filesystem and inquirer module
+const inquirer = require("inquirer");
 
-// require generatePage
-const generatePage = require("./src/page-template.js");
+inquirer
+  .prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "What is your name?",
+    },
+  ])
+  .then((answers) => console.log(answers));
+// const fs = require("fs");
 
-//collect command-line arguments
-const profileDataArgs = process.argv.slice(2);
+// // require generatePage
+// const generatePage = require("./src/page-template.js");
 
-// extract arguments and store them in their own variables
-const [name, github] = profileDataArgs;
+// const pageHTML = generatePage(name, github);
 
-// create a file: filename, data written, and callback for error
-fs.writeFile("./index.html", generatePage(name, github), (err) => {
-  if (err) throw err;
+// // create a file: filename, data written, and callback for error
+// fs.writeFile("./index.html", pageHTML, (err) => {
+//   if (err) throw err;
 
-  console.log("Portfolio complete! Checkout index.html to see the output!");
-});
+//   console.log("Portfolio complete! Checkout index.html to see the output!");
+// });
